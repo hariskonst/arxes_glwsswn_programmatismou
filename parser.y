@@ -71,7 +71,7 @@ div_block:
     DIV_OPEN div_opt DIV_CLOSE;
 
 div_opt:
-    div_opt | div_elements
+    div_opt div_elements | div_elements
 ;
 
 div_elements:
