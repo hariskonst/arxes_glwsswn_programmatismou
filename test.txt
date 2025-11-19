@@ -1,0 +1,13 @@
+<MYHTML>
+<head>
+<title>Test</title>
+<meta>
+</head>
+<body>
+<p>Hello world</p>
+<div>
+  <p>Nested paragraph</p>
+  <img>
+</div>
+</body>
+</MYHTML>

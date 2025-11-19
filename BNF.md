@@ -1,8 +1,8 @@
 <file> ::= "<MYHTML>" <head_opt> <body> "</MYHTML>";
 
-<head_opt> ::= ε | <head>
+<head_opt> ::= ε | <head_block>
 
-<head> ::= "<head>" <title> <meta_opt> "</head>"
+<head_block> ::= "<head>" <title> <meta_opt> "</head>"
 <meta_opt> ::= ε | <meta_opt> <meta>;
 
 <title> ::= "<title>" TEXT "</title>"
@@ -11,8 +11,8 @@
         | "<meta" "name=" STRING "content=" STRING ">"
 
 <body> ::= "<body>" <body_opt> "</body>"
-<body_opt> ::= ε | <body_opt> <body_children>
-<body_children> ::= <p> | <a> | <img> | <form> | <div>
+<body_opt> ::= ε | <body_opt> <body_elements>
+<body_elements> ::= <p> | <a> | <img> | <form> | <div>
 
 <p> ::= "<p" "id=" QUOTED <style_opt> ">" <text_opt> "</p>"
 
