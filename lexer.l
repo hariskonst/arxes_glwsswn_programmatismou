@@ -41,7 +41,7 @@
 
 "<input>" {printf("%s", yytext); return INPUT;}
 
-[a-zA-Z0-9_:;,.!? ]+ { printf("%s", yytext); return STRING; }
+[a-zA-Z0-9_:;,.!?]+ { printf("%s", yytext); return STRING; }
 
 [ \t\n]    { printf("%s", yytext); } /*typwnw allages grammis kai kena */
 .           { printf("%s", yytext); } /*otan vriskw agnwsto xaraktira typwnw */

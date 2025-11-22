@@ -39,7 +39,7 @@ head_opt:
 ;
 
 head_block:
-    HEAD_OPEN TITLE_OPEN STRING TITLE_CLOSE meta_list HEAD_CLOSE
+    HEAD_OPEN TITLE_OPEN text TITLE_CLOSE meta_list HEAD_CLOSE
 ;
 
 meta_list:
@@ -65,7 +65,7 @@ p_block:
 ;
 
 p_content:
-    STRING | ;
+    text | ;
 
 div_block:
     DIV_OPEN div_opt DIV_CLOSE;
@@ -105,8 +105,13 @@ form_elements:
 ;
 
 label_block:
-    LABEL_OPEN STRING LABEL_CLOSE;
+    LABEL_OPEN text LABEL_CLOSE;
 
+
+text:
+    text STRING
+    | STRING
+;
 
 %%
 
