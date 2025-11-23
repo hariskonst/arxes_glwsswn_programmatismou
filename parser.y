@@ -23,6 +23,13 @@
 %token INPUT
 %token STRING
 
+/* tokens gia ta attributes */
+%token MEGALYTERO    /* > */
+%token ISON          /* = */
+%token AUTAKIA       /* "123" */
+
+%token ID CHARSET NAME CONTENT STYLE HREF SRC ALT WIDTH HEIGHT VALUE TYPE FOR
+
 %%
 
 /* BNF GRAMMAR */
@@ -43,8 +50,12 @@ head_block:
 ;
 
 meta_list:
-    meta_list META
+    meta_list meta_block
     |
+;
+
+meta_block:
+    META attr_list MEGALYTERO
 ;
 
 body_opt:
@@ -57,18 +68,22 @@ body_elements:
     |div_block
     |a_block
     |form_block
-    |IMAGE
+    |img_block
+;
+
+img_block:
+    IMAGE attr_list MEGALYTERO
 ;
 
 p_block:
-    P_OPEN p_content P_CLOSE
+    P_OPEN attr_list MEGALYTERO p_content P_CLOSE
 ;
 
 p_content:
     text | ;
 
 div_block:
-    DIV_OPEN div_opt DIV_CLOSE;
+    DIV_OPEN attr_list MEGALYTERO div_opt DIV_CLOSE;
 
 div_opt:
     div_opt div_elements | div_elements
@@ -78,21 +93,21 @@ div_elements:
     p_block
     |a_block
     |form_block
-    |IMAGE
+    |img_block
 ;
 
 a_block:
-    A_OPEN a_opt A_CLOSE;
+    A_OPEN attr_list MEGALYTERO a_opt A_CLOSE;
 
 a_opt:
     STRING 
-    | IMAGE 
-    | STRING IMAGE 
+    | img_block 
+    | STRING img_block 
     |  
 ;
 
 form_block:
-    FORM_OPEN form_opt FORM_CLOSE;
+    FORM_OPEN attr_list MEGALYTERO form_opt FORM_CLOSE;
 
 form_opt:
     form_opt form_elements
@@ -100,18 +115,37 @@ form_opt:
 ;
 
 form_elements:
-    INPUT
+    input_block
     | label_block
 ;
 
-label_block:
-    LABEL_OPEN text LABEL_CLOSE;
+input_block:
+    INPUT attr_list MEGALYTERO
+;
 
+label_block:
+    LABEL_OPEN attr_list MEGALYTERO text LABEL_CLOSE;
 
 text:
     text STRING
     | STRING
 ;
+
+attr_list:
+    attr_list attr_item
+    |
+;
+
+attr_item:
+    attr_name ISON AUTAKIA
+;
+
+attr_name:
+    ID | CHARSET | NAME | CONTENT | STYLE 
+    | HREF | SRC | ALT | WIDTH | HEIGHT | VALUE 
+    | TYPE | FOR
+;
+
 
 %%
 

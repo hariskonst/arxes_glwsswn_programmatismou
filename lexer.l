@@ -6,6 +6,9 @@
 /*leme ston lexer na metraei automata tis grammes stin metavliti yylineno */
 %option yylineno
 
+/* orizoume thn katastash TAG */
+%x TAG 
+
 %%
 
 "<MYHTML>"  {printf("%s", yytext); return MYHTML_OPEN; }  /*printf gia na ektipwsoume kathe grammi tou programmatos pou diavazetai */
@@ -17,34 +20,55 @@
 "<title>"  {printf("%s", yytext); return TITLE_OPEN; }
 "</title>" {printf("%s", yytext); return TITLE_CLOSE; }
 
-"<meta>" {printf("%s", yytext); return META;}
-
 "<body>" { printf("%s", yytext); return BODY_OPEN; } 
 "</body>" { printf("%s", yytext); return BODY_CLOSE; } 
 
-"<p>" {printf("%s", yytext); return P_OPEN; }
+"<p" {printf("%s", yytext); BEGIN(TAG); return P_OPEN; } //me to begin tag ksekinaw thn katastash TAG
 "</p>" {printf("%s", yytext); return P_CLOSE;}
 
-"<div>" {printf("%s", yytext); return DIV_OPEN; }
+"<div" {printf("%s", yytext); BEGIN(TAG); return DIV_OPEN; }
 "</div>" {printf("%s", yytext); return DIV_CLOSE;}
 
-"<a>" {printf("%s", yytext); return A_OPEN; }
+"<a" {printf("%s", yytext); BEGIN(TAG); return A_OPEN; }
 "</a>" {printf("%s", yytext); return A_CLOSE;}
 
-"<img>" {printf("%s", yytext); return IMAGE;}
-
-"<form>" {printf("%s", yytext); return FORM_OPEN; }
+"<form" {printf("%s", yytext); BEGIN(TAG); return FORM_OPEN; }
 "</form>" {printf("%s", yytext); return FORM_CLOSE;}
 
-"<label>" {printf("%s", yytext); return LABEL_OPEN; }
+"<label" {printf("%s", yytext); BEGIN(TAG); return LABEL_OPEN; }
 "</label>" {printf("%s", yytext); return LABEL_CLOSE;}
 
-"<input>" {printf("%s", yytext); return INPUT;}
+"<meta" {printf("%s", yytext); BEGIN(TAG); return META;}
+"<img" {printf("%s", yytext); BEGIN(TAG); return IMAGE;}
+"<input" {printf("%s", yytext); BEGIN(TAG); return INPUT;} // TAG rules next
+
+<TAG>">" {printf("%s", yytext); BEGIN INITIAL; return MEGALYTERO;} //vrikame > ara teleiwsa me ta attributes
+
+<TAG>"id" {printf("%s", yytext); return ID;}
+<TAG>"href" {printf("%s", yytext); return HREF;}
+<TAG>"src" {printf("%s", yytext); return SRC;}
+<TAG>"alt" {printf("%s", yytext); return ALT;}
+<TAG>"style" {printf("%s", yytext); return STYLE;}
+<TAG>"type" {printf("%s", yytext); return TYPE;}
+<TAG>"value" {printf("%s", yytext); return VALUE;}
+<TAG>"for" {printf("%s", yytext); return FOR;}
+<TAG>"width" {printf("%s", yytext); return WIDTH;}
+<TAG>"height" {printf("%s", yytext); return HEIGHT;}
+<TAG>"name" {printf("%s", yytext); return NAME;}
+<TAG>"content" {printf("%s", yytext); return CONTENT;}
+<TAG>"charset" {printf("%s", yytext); return CHARSET;}
+
+<TAG>"=" {printf("%s", yytext); return ISON;}
+
+<TAG>\"[^\"]*\" {printf("%s", yytext); return AUTAKIA;} //anagnwrisi timwn
+
+<TAG>[ \t\n]+ {printf("%s", yytext);} //agnooume kena anamesa sta tags
+
 
 [a-zA-Z0-9_:;,.!?]+ { printf("%s", yytext); return STRING; }
 
-[ \t\n]    { printf("%s", yytext); } /*typwnw allages grammis kai kena */
-.           { printf("%s", yytext); } /*otan vriskw agnwsto xaraktira typwnw */
+[ \t\n]    { printf("%s", yytext); } /* agnooume kena */
+.           { printf("%s", yytext); } /* agnwstos xaraktiras */
 
 %%
 
