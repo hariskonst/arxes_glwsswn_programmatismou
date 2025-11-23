@@ -100,9 +100,9 @@ a_block:
     A_OPEN attr_list MEGALYTERO a_opt A_CLOSE;
 
 a_opt:
-    STRING 
+    text 
     | img_block 
-    | STRING img_block 
+    | text img_block 
     |  
 ;
 
