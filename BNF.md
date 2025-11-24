@@ -1,4 +1,4 @@
-<file> ::= "<MYHTML>" <head_opt> <body> "</MYHTML>";
+<program> ::= "<MYHTML>" <head_opt> <body> "</MYHTML>";
 
 <head_opt> ::= ε | <head_block>
 

@@ -8,10 +8,10 @@
 <div id="div1" style="color:blue">
     <a id="hyper" href="https://arxes.ceid.gr">
     Here comes an image.
-    <img height="kostas" width="lovve" src="image.jpg" id="myimg123"  alt="Example Image">
+    <img id="myimg123" src="image.jpg" alt="Example Image" height="kostas">
     </a>
 </div>
-<form id="form1">
+<form id="form1" style="giannis">
     <label for="name" id="label1">Name:</label>
     <input type="text" id="name">
     <input id="submit" type="submit" value="Submit">
