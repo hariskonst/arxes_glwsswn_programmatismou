@@ -13,8 +13,8 @@
 </div>
 <form id="form1" style="giannis">
     <label for="name" id="label1">Name:</label>
-    <input type="text" id="name">
-    <input id="submit" type="submit" value="Submit">
+    <input style="kostas" id="name" type="antetokounmpo">
+    <input id="submit" type="antetokounmpo" value="Submit">
 </form>
 </body>
 </MYHTML>
