@@ -1,6 +1,6 @@
 <MYHTML>
 <head>
-<title>Flex Bison Tutorial</title>
+<title>Flex Bison Tutorial !!!#</title>
 <meta charset="UTF-8">
 </head>
 <body>
@@ -8,7 +8,7 @@
 <div id="div1" style="color:blue">
     <a id="hyper" href="https://arxes.ceid.gr">
     Here comes an image.
-    <img id="myimg123" src="image.jpg" alt="Example Image" height="kostas">
+    <img id="myimg123" src="image.jpg" alt="Example Image" height="10">
     </a>
 </div>
 <form id="form1" style="giannis">

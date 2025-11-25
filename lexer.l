@@ -60,15 +60,16 @@
 
 <TAG>"=" {printf("%s", yytext); return ISON;}
 
-<TAG>\"[^\"]*\" {printf("%s", yytext); return AUTAKIA;} //anagnwrisi timwn
+<TAG>\"[1-9][0-9]*\" { printf("%s", yytext); return INT; } //1 giati to 0 den einai akrivws thetiko
 
-<TAG>[ \t\n]+ {printf("%s", yytext);} //agnooume kena anamesa sta tags
+<TAG>\"[^\"]*\" {printf("%s", yytext); return STRING;} //anagnwrisi alpharithmitikwn
 
+<TAG>[ \t\n]+  { printf("%s", yytext); } //agnwoume kena mesa sto tag
 
-[a-zA-Z0-9_:;,.!?]+ { printf("%s", yytext); return STRING; }
+[^<>\n\t\r ]+ { printf("%s", yytext); return TEXT; }
+[ \t\n\r]     { printf("%s", yytext); } 
+.             { printf("%s", yytext); }
 
-[ \t\n]    { printf("%s", yytext); } /* agnooume kena */
-.           { printf("%s", yytext); } /* agnwstos xaraktiras */
 
 %%
 

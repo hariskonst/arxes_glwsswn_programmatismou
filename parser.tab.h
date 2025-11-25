@@ -75,23 +75,24 @@ extern int yydebug;
     LABEL_OPEN = 276,              /* LABEL_OPEN  */
     LABEL_CLOSE = 277,             /* LABEL_CLOSE  */
     INPUT = 278,                   /* INPUT  */
-    STRING = 279,                  /* STRING  */
-    MEGALYTERO = 280,              /* MEGALYTERO  */
-    ISON = 281,                    /* ISON  */
-    AUTAKIA = 282,                 /* AUTAKIA  */
-    ID = 283,                      /* ID  */
-    CHARSET = 284,                 /* CHARSET  */
-    NAME = 285,                    /* NAME  */
-    CONTENT = 286,                 /* CONTENT  */
-    STYLE = 287,                   /* STYLE  */
-    HREF = 288,                    /* HREF  */
-    SRC = 289,                     /* SRC  */
-    ALT = 290,                     /* ALT  */
-    WIDTH = 291,                   /* WIDTH  */
-    HEIGHT = 292,                  /* HEIGHT  */
-    VALUE = 293,                   /* VALUE  */
-    TYPE = 294,                    /* TYPE  */
-    FOR = 295                      /* FOR  */
+    INT = 279,                     /* INT  */
+    STRING = 280,                  /* STRING  */
+    TEXT = 281,                    /* TEXT  */
+    MEGALYTERO = 282,              /* MEGALYTERO  */
+    ISON = 283,                    /* ISON  */
+    ID = 284,                      /* ID  */
+    CHARSET = 285,                 /* CHARSET  */
+    NAME = 286,                    /* NAME  */
+    CONTENT = 287,                 /* CONTENT  */
+    STYLE = 288,                   /* STYLE  */
+    HREF = 289,                    /* HREF  */
+    SRC = 290,                     /* SRC  */
+    ALT = 291,                     /* ALT  */
+    WIDTH = 292,                   /* WIDTH  */
+    HEIGHT = 293,                  /* HEIGHT  */
+    VALUE = 294,                   /* VALUE  */
+    TYPE = 295,                    /* TYPE  */
+    FOR = 296                      /* FOR  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
