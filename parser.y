@@ -87,7 +87,11 @@ p_content:
     text | ;
 
 div_block:
-    DIV_OPEN attr_list MEGALYTERO div_opt DIV_CLOSE;
+    DIV_OPEN div_attr_list MEGALYTERO div_opt DIV_CLOSE;
+
+div_attr_list:
+    ID K | ID K STYLE K | STYLE K ID K
+;
 
 div_opt:
     div_opt div_elements | div_elements
@@ -200,28 +204,18 @@ input_attr_list:
 ;
 
 label_block:
-    LABEL_OPEN attr_list MEGALYTERO text LABEL_CLOSE;
+    LABEL_OPEN lbl_attr_list MEGALYTERO text LABEL_CLOSE;
+
+lbl_attr_list:
+    ID K FOR K | FOR K ID K
+    | STYLE K ID K FOR K | ID K STYLE K FOR K | ID K FOR K STYLE K
+    | STYLE K FOR K ID K | FOR K STYLE K ID K | FOR K ID K STYLE K
+;
 
 text:
     text STRING
     | STRING
 ;
-
-attr_list:
-    attr_list attr_item
-    |
-;
-
-attr_item:
-    attr_name ISON AUTAKIA
-;
-
-attr_name:
-    ID | CHARSET | NAME | CONTENT | STYLE 
-    | HREF | SRC | ALT | WIDTH | HEIGHT | VALUE 
-    | TYPE | FOR
-;
-
 
 %%
 
