@@ -1,4 +1,3 @@
-# arxes_glwsswn_programmatismou
 # myHTML Parser (Flex & Bison)
 
 This project implements a **Lexical and Syntactic Analyzer** for the `myHTML` pseudo-language. [cite\_start]It was developed as part of the "Principles of Programming Languages & Compilers" course (Spring 2025) at the Department of Computer Engineering and Informatics (CEID), University of Patras[cite: 216, 217, 218].
