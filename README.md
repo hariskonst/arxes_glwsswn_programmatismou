@@ -1,6 +1,6 @@
 # myHTML Parser (Flex & Bison)
 
-This project implements a **Lexical and Syntactic Analyzer** for the `myHTML` pseudo-language. [cite\_start]It was developed as part of the "Principles of Programming Languages & Compilers" course (Spring 2025) at the Department of Computer Engineering and Informatics (CEID), University of Patras[cite: 216, 217, 218].
+This project implements a **Lexical and Syntactic Analyzer** for the `myHTML` pseudo-language. [cite\_start]It was developed as part of the "Principles of Programming Languages & Compilers" course (Spring 2025) at the Department of Computer Engineering and Informatics (CEID), University of Patras.
 
 ## Project Overview
 
@@ -45,19 +45,19 @@ gcc lex.yy.c parser.tab.c -o myParser.exe
 
 ### Usage
 
-[cite\_start]To parse a file, pass it as an argument to the executable[cite: 330]:
+To parse a file, pass it as an argument to the executable[cite: 330]:
 
 ```powershell
 .\myParser.exe test.txt
 ```
 
-If the syntax is correct, the program will output the structure and a success message. [cite\_start]If there are errors, it will report the line number where the error occurred[cite: 196].
+If the syntax is correct, the program will output the structure and a success message. [cite\_start]If there are errors, it will report the line number where the error occurred.
 
 ## File Structure
 
-  * [cite\_start]`lexer.l`: Flex file containing the token definitions and regular expressions[cite: 198].
-  * [cite\_start]`parser.y`: Bison file containing the BNF grammar and syntax rules[cite: 3].
-  * [cite\_start]`test.txt`: An example input file for testing the parser[cite: 1].
+  * `lexer.l`: Flex file containing the token definitions and regular expressions[cite: 198].
+  * `parser.y`: Bison file containing the BNF grammar and syntax rules[cite: 3].
+  * `test.txt`: An example input file for testing the parser[cite: 1].
 
 
 create a `.gitignore` file for you as well? It is useful to prevent generated files (like `lex.yy.c`, `parser.tab.c`, and `.exe` files) from being uploaded to your repository.
