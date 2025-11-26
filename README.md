@@ -8,10 +8,10 @@ The tool takes a source file written in `myHTML` (a simplified version of HTML) 
 
 ### Features
 
-  * [cite\_start]**Lexical Analysis:** Recognizes tokens, tags, and attributes using Flex[cite: 328].
-  * [cite\_start]**Syntactic Analysis:** Validates the structure of the code based on the defined BNF grammar[cite: 327].
-  * [cite\_start]**Attribute Handling:** Supports attributes in arbitrary order for tags like `<img>`, `<a>`, `<p>`, `<div>`, and inputs (implemented via Bison rules) [cite: 18-164].
-  * [cite\_start]**Structure Validation:** Ensures correct nesting of elements like `<head>`, `<body>`, `<form>`, etc.[cite: 261].
+  * **Lexical Analysis:** Recognizes tokens, tags, and attributes using Flex.
+  * **Syntactic Analysis:** Validates the structure of the code based on the defined BNF grammar.
+  * **Attribute Handling:** Supports attributes in arbitrary order for tags like `<img>`, `<a>`, `<p>`, `<div>`, and inputs (implemented via Bison rules) .
+  * **Structure Validation:** Ensures correct nesting of elements like `<head>`, `<body>`, `<form>`, etc..
 
 ## Supported Tags
 
