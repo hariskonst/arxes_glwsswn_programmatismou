@@ -55,9 +55,6 @@ If the syntax is correct, the program will output the structure and a success me
 
 ## File Structure
 
-  * `lexer.l`: Flex file containing the token definitions and regular expressions[cite: 198].
-  * `parser.y`: Bison file containing the BNF grammar and syntax rules[cite: 3].
-  * `test.txt`: An example input file for testing the parser[cite: 1].
-
-
-create a `.gitignore` file for you as well? It is useful to prevent generated files (like `lex.yy.c`, `parser.tab.c`, and `.exe` files) from being uploaded to your repository.
+  * `lexer.l`: Flex file containing the token definitions and regular expressions.
+  * `parser.y`: Bison file containing the BNF grammar and syntax rules.
+  * `test.txt`: An example input file for testing the parser.
