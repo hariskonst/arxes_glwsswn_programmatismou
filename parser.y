@@ -37,7 +37,7 @@
 program:
     MYHTML_OPEN head_opt BODY_OPEN body_opt BODY_CLOSE MYHTML_CLOSE
     { 
-        printf("\n\n> Επιτυχία!\n"); 
+        printf("\n\n**Επιτυχία!**\n"); 
     }
 ;
 

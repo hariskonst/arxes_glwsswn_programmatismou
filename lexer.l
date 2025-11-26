@@ -8,8 +8,12 @@
 
 /* orizoume thn katastash TAG */
 %x TAG 
+/* orizoume thn katastash COMMENT */
+%x COMMENT
 
 %%
+
+"<--" {printf("%s", yytext); BEGIN COMMENT;}
 
 "<MYHTML>"  {printf("%s", yytext); return MYHTML_OPEN; }  /*printf gia na ektipwsoume kathe grammi tou programmatos pou diavazetai */
 "</MYHTML>" {printf("%s", yytext); return MYHTML_CLOSE; } 
@@ -42,6 +46,11 @@
 "<img" {printf("%s", yytext); BEGIN(TAG); return IMAGE;}
 "<input" {printf("%s", yytext); BEGIN(TAG); return INPUT;} // TAG rules next
 
+<COMMENT>"-->" {printf("%s", yytext); BEGIN INITIAL;}
+<COMMENT>"--" {fflush(stdout);fprintf(stderr, "\n\nError line %d: Comments cannot contain double hyphens (--)\n", yylineno); exit(1);}
+<COMMENT>\n {printf("%s", yytext);}
+<COMMENT>. {printf("%s", yytext);}
+
 <TAG>">" {printf("%s", yytext); BEGIN INITIAL; return MEGALYTERO;} //vrikame > ara teleiwsa me ta attributes
 
 <TAG>"id" {printf("%s", yytext); return ID;}
@@ -60,9 +69,15 @@
 
 <TAG>"=" {printf("%s", yytext); return ISON;}
 
+<TAG>"<--" {fflush(stdout);fprintf(stderr, "\nError line %d: Comments are not allowed inside tags\n", yylineno); exit(1); }
+
 <TAG>\"[1-9][0-9]*\" { printf("%s", yytext); return INT; } //1 giati to 0 den einai akrivws thetiko
 
+<TAG>\'[1-9][0-9]*\' { printf("%s", yytext); return INT; }
+
 <TAG>\"[^\"]*\" {printf("%s", yytext); return STRING;} //anagnwrisi alpharithmitikwn
+
+<TAG>\'[^\']*\'      { printf("%s", yytext); return STRING; }
 
 <TAG>[ \t\n]+  { printf("%s", yytext); } //agnwoume kena mesa sto tag
 

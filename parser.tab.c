@@ -1773,7 +1773,7 @@ yyreduce:
   case 2: /* program: MYHTML_OPEN head_opt BODY_OPEN body_opt BODY_CLOSE MYHTML_CLOSE  */
 #line 39 "parser.y"
     { 
-        printf("\n\n> Επιτυχία!\n"); 
+        printf("\n\n**Επιτυχία!**\n"); 
     }
 #line 1779 "parser.tab.c"
     break;
