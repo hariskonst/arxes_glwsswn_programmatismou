@@ -1,37 +1,148 @@
-<program> ::= "<MYHTML>" <head_opt> <body> "</MYHTML>";
+<program> ::= MYHTML_OPEN <head_opt> BODY_OPEN <body_opt> BODY_CLOSE MYHTML_CLOSE
+        
+<head_opt> ::= <head_block> 
+                | ε
+        
+<head_block> ::= HEAD_OPEN TITLE_OPEN <text> TITLE_CLOSE <meta_list> HEAD_CLOSE
 
-<head_opt> ::= ε | <head_block>
+<meta_list> ::= <meta_list><meta_block> 
+                | ε
 
-<head_block> ::= "<head>" <title> <meta_opt> "</head>"
-<meta_opt> ::= ε | <meta_opt> <meta>;
+<meta_block> ::= META <meta_attr_list> MEGALYTERO
 
-<title> ::= "<title>" TEXT "</title>"
+<meta_attr_list> ::= CHARSET ISON STRING | NAME ISON STRING CONTENT ISON STRING
 
-<meta> ::= "<meta" "charset=" STRING ">"
-        | "<meta" "name=" STRING "content=" STRING ">"
+<body_opt> ::= <body_opt><body_elements>
+        | ε
 
-<body> ::= "<body>" <body_opt> "</body>"
-<body_opt> ::= ε | <body_opt> <body_elements>
-<body_elements> ::= <p> | <a> | <img> | <form> | <div>
+<body_elements> ::= 
+        <p_block>
+        |<div_block>
+        |<a_block>
+        |<form_block>
+        |<img_block>
 
-<p> ::= "<p" "id=" QUOTED <style_opt> ">" <text_opt> "</p>"
+<p_block> ::= P_OPEN <p_attr_list> MEGALYTERO <p_content> P_CLOSE
 
-<a> ::= "<a" "id=" QUOTED "href=" QUOTED ">" <text_img_opt> "</a>"
-<text_img_opt> ::= ε | TEXT | <img> | TEXT <img> | <img> TEXT | TEXT <img> TEXT
+<p_attr_list> ::=
+        ID ISON STRING
+         | ID ISON STRING STYLE ISON STRING 
+         | STYLE ISON STRING ID ISON STRING
 
-<img> ::= "<img" "id=" QUOTED "src=" QUOTED "alt=" QUOTED <width_height_opt> ">"
-<width_height_opt> ::= <width_opt> <height_opt>
-<width_opt>  ::= ε | "width="  QUOTED
-<height_opt> ::= ε | "height=" QUOTED
+<p_content> ::= <text>
+        | ε
 
-<form> ::= "<form" "id=" QUOTED <style_opt> ">" <form_children_opt> "</form>"
-<form_children_opt> ::= ε | <input><form_children_opt> | <label><form_children_opt>
+<div_block> ::=
+    DIV_OPEN <div_attr_list> MEGALYTERO <div_opt> DIV_CLOSE
 
-<input> ::= "<input" "id=" QUOTED "type=" QUOTED <input_opt> ">"
-<input_opt> ::= ε | <input_opt> "value=" QUOTED | <input_opt> "style=" QUOTED
+<div_attr_list> ::=
+        ID <K> 
+        | ID <K> STYLE <K> 
+        | STYLE <K> ID <K>
 
-<label> ::= "<label" "id=" QUOTED "for=" QUOTED <style_opt> ">" <text_opt> "</label>"
+<div_opt> ::=
+        <div_opt><div_elements> 
+        | <div_elements>
 
-<div> ::= "<div" "id=" QUOTED <style_opt> ">" <div_opt> "</div>"
-<div_opt> ::= ε | <div_opt> <div_children>
-<div_children> ::= <p> | <a> | <img> | <form>
+<div_elements> ::=
+        <p_block>
+        |<a_block>
+        |<form_block>
+        |<img_block>
+
+<a_block> ::= A_OPEN <a_attr_list> MEGALYTERO <a_opt> A_CLOSE;
+
+<a_attr_list> ::= ID ISON STRING HREF ISON STRING 
+                | HREF ISON STRING ID ISON STRING
+
+<a_opt> ::=
+    <text> 
+    | <img_block> 
+    | <text><img_block> 
+    |  ε
+
+<img_block> ::=
+    IMAGE <img_attr_list> MEGALYTERO
+
+<img_attr_list> ::=
+   HEIGHT <I> WIDTH <I> ID <K> SRC <K> ALT <K> | WIDTH <I> HEIGHT <I> ID <K> SRC <K> ALT <K> | WIDTH <I> ID <K> HEIGHT <I> SRC <K> ALT <K> | WIDTH <I> ID <K> SRC <K> HEIGHT <I> ALT <K> | WIDTH <I> ID <K> SRC <K> ALT <K> HEIGHT <I>   
+   | HEIGHT <I> ID <K> WIDTH <I> SRC <K> ALT <K> | ID <K> HEIGHT <I> WIDTH <I> SRC <K> ALT <K> | ID <K> WIDTH <I> HEIGHT <I> SRC <K> ALT <K> | ID <K> WIDTH <I> SRC <K> HEIGHT <I> ALT <K> | ID <K> WIDTH <I> SRC <K> ALT <K> HEIGHT <I>
+   | HEIGHT <I> ID <K> SRC <K> WIDTH <I> ALT <K> | ID <K> HEIGHT <I> SRC <K> WIDTH <I> ALT <K> | ID <K> SRC <K> HEIGHT <I> WIDTH <I> ALT <K> | ID <K> SRC <K> WIDTH <I> HEIGHT <I> ALT <K> | ID <K> SRC <K> WIDTH <I> ALT <K> HEIGHT <I>
+   | HEIGHT <I> ID <K> SRC <K> ALT <K> WIDTH <I> | ID <K> HEIGHT <I> SRC <K> ALT <K> WIDTH <I> | ID <K> SRC <K> HEIGHT <I> ALT <K> WIDTH <I> | ID <K> SRC <K> ALT <K> HEIGHT <I> WIDTH <I> | ID <K> SRC <K> ALT <K> WIDTH <I> HEIGHT <I>
+   | HEIGHT <I> WIDTH <I> ID <K> ALT <K> SRC <K> | WIDTH <I> HEIGHT <I> ID <K> ALT <K> SRC <K> | WIDTH <I> ID <K> HEIGHT <I> ALT <K> SRC <K> | WIDTH <I> ID <K> ALT <K> HEIGHT <I> SRC <K> | WIDTH <I> ID <K> ALT <K> SRC <K> HEIGHT <I>
+   | HEIGHT <I> ID <K> WIDTH <I> ALT <K> SRC <K> | ID <K> HEIGHT <I> WIDTH <I>I ALT <K> SRC <K> | ID <K> WIDTH <I> HEIGHT <I> ALT <K> SRC <K> | ID <K> WIDTH <I> ALT <K> HEIGHT <I> SRC <K> | ID <K> WIDTH <I> ALT <K> SRC <K> HEIGHT <I>
+   | HEIGHT <I> ID <K> ALT <K> WIDTH <I> SRC <K> | ID <K> HEIGHT <I> ALT <K> WIDTH <I> SRC <K> | ID <K> ALT <K> HEIGHT <I> WIDTH <I> SRC <K> | ID <K> ALT <K> WIDTH <I> HEIGHT <I> SRC <K> | ID <K> ALT <K> WIDTH <I> SRC <K> HEIGHT <I>
+   | HEIGHT <I> ID <K> ALT <K> SRC <K> WIDTH <I> | ID <K> HEIGHT <I> ALT <K> SRC <K> WIDTH <I> | ID <K> ALT <K> HEIGHT <I> SRC <K> WIDTH <I> | ID <K> ALT <K> SRC <K> HEIGHT <I> WIDTH <I> | ID <K> ALT <K> SRC <K> WIDTH <I> HEIGHT <I>
+   | HEIGHT <I> WIDTH <I> SRC <K> ID <K> ALT <K> | WIDTH <I> HEIGHT <I> SRC <K> ID <K> ALT <K> | WIDTH <I> SRC <K> HEIGHT <I> ID <K> ALT <K> | WIDTH <I> SRC <K> ID <K> HEIGHT <I> ALT <K> | WIDTH <I> SRC <K> ID <K> ALT <K> HEIGHT <I>
+   | HEIGHT <I> SRC <K> WIDTH <I> ID <K> ALT <K> | SRC <K> HEIGHT <I> WIDTH <I> ID <K> ALT <K> | SRC <K> WIDTH <I> HEIGHT <I> ID <K> ALT <K> | SRC <K> WIDTH <I> ID <K> HEIGHT <I> ALT <K> | SRC <K> WIDTH <I> ID <K> ALT <K> HEIGHT <I>
+   | HEIGHT <I> SRC <K> ID <K> WIDTH <I> ALT <K> | SRC <K> HEIGHT <I> ID <K> WIDTH <I> ALT <K> | SRC <K> ID <K> HEIGHT <I> WIDTH <I> ALT <K> | SRC <K> ID <K> WIDTH <I> HEIGHT <I> ALT <K> | SRC <K> ID <K> WIDTH <I> ALT <K> HEIGHT <I>
+   | HEIGHT <I> SRC <K> ID <K> ALT <K> WIDTH <I> | SRC <K> HEIGHT <I> ID <K> ALT <K> WIDTH <I> | SRC <K> ID <K> HEIGHT <I> ALT <K> WIDTH <I> | SRC <K> ID <K> ALT <K> HEIGHT <I> WIDTH <I> | SRC <K> ID <K> ALT <K> WIDTH <I> HEIGHT <I>
+   | HEIGHT <I> WIDTH <I> SRC <K> ALT <K> ID <K> | WIDTH <I> HEIGHT <I> SRC <K> ALT <K> ID <K> | WIDTH <I> SRC <K> HEIGHT <I> ALT <K> ID <K> | WIDTH <I> SRC <K> ALT <K> HEIGHT <I> ID <K> | WIDTH <I> SRC <K> ALT <K> ID <K> HEIGHT <I>
+   | HEIGHT <I> SRC <K> WIDTH <I> ALT <K> ID <K> | SRC <K> HEIGHT <I> WIDTH <I> ALT <K> ID <K> | SRC <K> WIDTH <I> HEIGHT <I> ALT <K> ID <K> | SRC <K> WIDTH <I> ALT <K> HEIGHT <I> ID <K> | SRC <K> WIDTH <I> ALT <K> ID <K> HEIGHT <I>
+   | HEIGHT <I> SRC <K> ALT <K> WIDTH <I> ID <K> | SRC <K> HEIGHT <I> ALT <K> WIDTH <I> ID <K> | SRC <K> ALT <K> HEIGHT <I> WIDTH <I> ID <K> | SRC <K> ALT <K> WIDTH <I> HEIGHT <I> ID <K> | SRC <K> ALT <K> WIDTH <I> ID <K> HEIGHT <I> 
+   | HEIGHT <I> SRC <K> ALT <K> ID <K> WIDTH <I> | SRC <K> HEIGHT <I> ALT <K> ID <K> WIDTH <I> | SRC <K> ALT <K> HEIGHT <I> ID <K> WIDTH <I> | SRC <K> ALT <K> ID <K> HEIGHT <I> WIDTH <I> | SRC <K> ALT <K> ID <K> WIDTH <I> HEIGHT <I>
+   | HEIGHT <I> WIDTH <I> ALT <K> SRC <K> ID <K> | WIDTH <I> HEIGHT <I> ALT <K> SRC <K> ID <K> | WIDTH <I> ALT <K> HEIGHT <I> SRC <K> ID <K> | WIDTH <I> ALT <K> SRC <K> HEIGHT <I> ID <K> | WIDTH <I> ALT <K> SRC <K> ID <K> HEIGHT <I>
+   | HEIGHT <I> ALT <K> WIDTH <I> SRC <K> ID <K> | ALT <K> HEIGHT <I> WIDTH <I> SRC <K> ID <K> | ALT <K> WIDTH <I> HEIGHT <I> SRC <K> ID <K> | ALT <K> WIDTH <I> SRC <K> HEIGHT <I> ID <K> | ALT <K> WIDTH <I> SRC <K> ID <K> HEIGHT <I>
+   | HEIGHT <I> ALT <K> SRC <K> WIDTH <I> ID <K> | ALT <K> HEIGHT <I> SRC <K> WIDTH <I> ID <K> | ALT <K> SRC <K> HEIGHT <I> WIDTH <I> ID <K> | ALT <K> SRC <K> WIDTH <I> HEIGHT <I> ID <K> | ALT <K> SRC <K> WIDTH <I> ID <K> HEIGHT <I>
+   | HEIGHT <I> ALT <K> SRC <K> ID <K> WIDTH <I> | ALT <K> HEIGHT <I> SRC <K> ID <K> WIDTH <I> | ALT <K> SRC <K> HEIGHT <I> ID <K> WIDTH <I> | ALT <K> SRC <K> ID <K> HEIGHT <I> WIDTH <I> | ALT <K> SRC <K> ID <K> WIDTH <I> HEIGHT <I>
+   | HEIGHT <I> WIDTH <I> ALT <K> ID <K> SRC <K> | WIDTH <I> HEIGHT <I> ALT <K> ID <K> SRC <K> | WIDTH <I> ALT <K> HEIGHT <I> ID <K> SRC <K> | WIDTH <I> ALT <K> ID <K> HEIGHT <I> SRC <K> | WIDTH <I> ALT <K> ID <K> SRC <K> HEIGHT <I>
+   | HEIGHT <I> ALT <K> WIDTH <I> ID <K> SRC <K> | ALT <K> HEIGHT <I> WIDTH <I> ID <K> SRC <K> | ALT <K> WIDTH <I> HEIGHT <I> ID <K> SRC <K> | ALT <K> WIDTH <I> ID <K> HEIGHT <I> SRC <K> | ALT <K> WIDTH <I> ID <K> SRC <K> HEIGHT <I>
+   | HEIGHT <I> ALT <K> ID <K> WIDTH <I> SRC <K> | ALT <K> HEIGHT <I> ID <K> WIDTH <I> SRC <K> | ALT <K> ID <K> HEIGHT <I> WIDTH <I> SRC <K> | ALT <K> ID <K> WIDTH <I> HEIGHT <I> SRC <K> | ALT <K> ID <K> WIDTH <I> SRC <K> HEIGHT <I>
+   | HEIGHT <I> ALT <K> ID <K> SRC <K> WIDTH <I> | ALT <K> HEIGHT <I> ID <K> SRC <K> WIDTH <I> | ALT <K> ID <K> HEIGHT <I> SRC <K> WIDTH <I> | ALT <K> ID <K> SRC <K> HEIGHT <I> WIDTH <I> | ALT <K> ID <K> SRC <K> WIDTH <I> HEIGHT <I>
+   | WIDTH <I> ID <K> SRC <K> ALT <K> | ID <K> WIDTH <I> SRC <K> ALT <K> | ID <K> SRC <K> WIDTH <I> ALT <K> | ID <K> SRC <K> ALT <K> WIDTH <I> 
+   | WIDTH <I> ID <K> ALT <K> SRC <K> | ID <K> WIDTH <I> ALT <K> SRC <K> | ID <K> ALT <K> WIDTH <I> SRC <K> | ID <K> ALT <K> SRC <K> WIDTH <I>
+   | WIDTH <I> SRC <K> ALT <K> ID <K> | SRC <K> WIDTH <I> ALT <K> ID <K> | SRC <K> ALT <K> WIDTH <I> ID <K> | SRC <K> ALT <K> ID <K> WIDTH <I>
+   | WIDTH <I> SRC <K> ID <K> ALT <K> | SRC <K> WIDTH <I> ID <K> ALT <K> | SRC <K> ID <K> WIDTH <I> ALT <K> | SRC <K> ID <K> ALT <K> WIDTH <I>
+   | WIDTH <I> ALT <K> SRC <K> ID <K> | ALT <K> WIDTH <I> SRC <K> ID <K> | ALT <K> SRC <K> WIDTH <I> ID <K> | ALT <K> SRC <K> ID <K> WIDTH <I>
+   | WIDTH <I> ALT <K> ID <K> SRC <K> | ALT <K> WIDTH <I> ID <K> SRC <K> | ALT <K> ID <K> WIDTH <I> SRC <K> | ALT <K> ID <K> SRC <K> WIDTH <I>
+   | HEIGHT <I> ID <K> SRC <K> ALT <K> | ID <K> HEIGHT <I> SRC <K> ALT <K> | ID <K> SRC <K> HEIGHT <I> ALT <K> | ID <K> SRC <K> ALT <K> HEIGHT <I> 
+   | HEIGHT <I> ID <K> ALT <K> SRC <K> | ID <K> HEIGHT <I> ALT <K> SRC <K> | ID <K> ALT <K> HEIGHT <I> SRC <K> | ID <K> ALT <K> SRC <K> HEIGHT <I>
+   | HEIGHT <I> SRC <K> ALT <K> ID <K> | SRC <K> HEIGHT <I> ALT <K> ID <K> | SRC <K> ALT <K> HEIGHT <I> ID <K> | SRC <K> ALT <K> ID <K> HEIGHT <I>
+   | HEIGHT <I> SRC <K> ID <K> ALT <K> | SRC <K> HEIGHT <I> ID <K> ALT <K> | SRC <K> ID <K> HEIGHT <I> ALT <K> | SRC <K> ID <K> ALT <K> HEIGHT <I>
+   | HEIGHT <I> ALT <K> SRC <K> ID <K> | ALT <K> HEIGHT <I> SRC <K> ID <K> | ALT <K> SRC <K> HEIGHT <I> ID <K> | ALT <K> SRC <K> ID <K> HEIGHT <I>
+   | HEIGHT <I> ALT <K> ID <K> SRC <K> | ALT <K> HEIGHT <I> ID <K> SRC <K> | ALT <K> ID <K> HEIGHT <I> SRC <K> | ALT <K> ID <K> SRC <K> HEIGHT <I>
+   | ID <K> SRC <K> ALT <K> | ID <K> ALT <K> SRC <K>
+   | SRC <K> ALT <K> ID <K> | SRC <K> ID <K> ALT <K>
+   | ALT <K> SRC <K> ID <K> | ALT <K> ID <K> SRC <K>
+
+<I> ::=  ISON INT
+
+<K> ::=  ISON STRING
+
+<form_block> ::= FORM_OPEN <form_attr_list> MEGALYTERO <form_opt> FORM_CLOSE
+
+<form_attr_list> ::= ID ISON STRING | ID ISON STRING STYLE ISON STRING | STYLE ISON STRING ID ISON STRING
+
+<form_opt> ::=
+    <form_opt><form_elements>
+    | <form_elements>
+    
+<form_elements> ::=
+    <input_block>
+    | <label_block>
+
+<input_block> ::= INPUT <input_attr_list> MEGALYTERO
+
+<input_attr_list> ::=
+    TYPE <K> ID <K> | ID <K> TYPE <K>
+    | VALUE <K> TYPE <K> ID <K> | TYPE <K> VALUE <K> ID <K> | TYPE <K> ID <K> VALUE <K>
+    | VALUE <K> ID <K> TYPE <K> | ID <K> VALUE <K> TYPE <K> | ID <K> TYPE <K> VALUE <K>
+    | STYLE <K> TYPE <K> ID <K> | TYPE <K> STYLE <K> ID <K> | TYPE <K> ID <K> STYLE <K>
+    | STYLE <K> ID <K> TYPE <K> | ID <K> STYLE <K> TYPE <K> | ID <K> TYPE <K> STYLE <K>
+    | VALUE <K> STYLE <K> TYPE <K> ID <K> | STYLE <K> VALUE <K> TYPE <K> ID <K> | STYLE <K> TYPE <K> VALUE <K> ID <K> | STYLE <K> TYPE <K> ID <K> VALUE <K>
+    | VALUE <K> TYPE <K> STYLE <K> ID <K> | TYPE <K> VALUE <K> STYLE <K> ID <K> | TYPE <K> STYLE <K> VALUE <K> ID <K> | TYPE <K> STYLE <K> ID <K> VALUE <K>
+    | VALUE <K> TYPE <K> ID <K> STYLE <K> | TYPE <K> VALUE <K> ID <K> STYLE <K> | TYPE <K> ID <K> VALUE <K> STYLE <K> | TYPE <K> ID <K> STYLE <K> VALUE <K>
+    | VALUE <K> STYLE <K> ID <K> TYPE <K> | STYLE <K> VALUE <K> ID <K> TYPE <K> | STYLE <K> ID <K> VALUE <K> TYPE <K> | STYLE <K> ID <K> TYPE <K> VALUE <K>
+    | VALUE <K> ID <K> STYLE <K> TYPE <K> | ID <K> VALUE <K> STYLE <K> TYPE <K> | ID <K> STYLE <K> VALUE <K> TYPE <K> | ID <K> STYLE <K> TYPE <K> VALUE <K>
+    | VALUE <K> ID <K> TYPE <K> STYLE <K> | ID <K> VALUE <K> TYPE <K> STYLE <K> | ID <K> TYPE <K> VALUE <K> STYLE <K> | ID <K> TYPE <K> STYLE <K> VALUE <K>
+
+<label_block> ::= LABEL_OPEN <lbl_attr_list> MEGALYTERO <text> LABEL_CLOSE;
+
+<lbl_attr_list> ::=
+    ID <K> FOR <K> | FOR <K> ID <K>
+    | STYLE <K> ID <K> FOR <K> | ID <K> STYLE <K> FOR <K> | ID <K> FOR <K> STYLE <K>
+    | STYLE <K> FOR <K> ID <K> | FOR <K> STYLE <K> ID <K> | FOR <K> ID <K> STYLE <K>
+
+<text> ::=
+    <text> TEXT
+    | TEXT
