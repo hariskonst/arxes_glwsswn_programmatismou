@@ -32,8 +32,7 @@
 <p_content> ::= <text>
         | ε
 
-<div_block> ::=
-    DIV_OPEN <div_attr_list> MEGALYTERO <div_opt> DIV_CLOSE
+<div_block> ::= DIV_OPEN <div_attr_list> MEGALYTERO <div_opt> DIV_CLOSE
 
 <div_attr_list> ::=
         ID <K> 
@@ -70,7 +69,7 @@
    | HEIGHT <I> ID <K> SRC <K> WIDTH <I> ALT <K> | ID <K> HEIGHT <I> SRC <K> WIDTH <I> ALT <K> | ID <K> SRC <K> HEIGHT <I> WIDTH <I> ALT <K> | ID <K> SRC <K> WIDTH <I> HEIGHT <I> ALT <K> | ID <K> SRC <K> WIDTH <I> ALT <K> HEIGHT <I>
    | HEIGHT <I> ID <K> SRC <K> ALT <K> WIDTH <I> | ID <K> HEIGHT <I> SRC <K> ALT <K> WIDTH <I> | ID <K> SRC <K> HEIGHT <I> ALT <K> WIDTH <I> | ID <K> SRC <K> ALT <K> HEIGHT <I> WIDTH <I> | ID <K> SRC <K> ALT <K> WIDTH <I> HEIGHT <I>
    | HEIGHT <I> WIDTH <I> ID <K> ALT <K> SRC <K> | WIDTH <I> HEIGHT <I> ID <K> ALT <K> SRC <K> | WIDTH <I> ID <K> HEIGHT <I> ALT <K> SRC <K> | WIDTH <I> ID <K> ALT <K> HEIGHT <I> SRC <K> | WIDTH <I> ID <K> ALT <K> SRC <K> HEIGHT <I>
-   | HEIGHT <I> ID <K> WIDTH <I> ALT <K> SRC <K> | ID <K> HEIGHT <I> WIDTH <I>I ALT <K> SRC <K> | ID <K> WIDTH <I> HEIGHT <I> ALT <K> SRC <K> | ID <K> WIDTH <I> ALT <K> HEIGHT <I> SRC <K> | ID <K> WIDTH <I> ALT <K> SRC <K> HEIGHT <I>
+   | HEIGHT <I> ID <K> WIDTH <I> ALT <K> SRC <K> | ID <K> HEIGHT <I> WIDTH <I> ALT <K> SRC <K> | ID <K> WIDTH <I> HEIGHT <I> ALT <K> SRC <K> | ID <K> WIDTH <I> ALT <K> HEIGHT <I> SRC <K> | ID <K> WIDTH <I> ALT <K> SRC <K> HEIGHT <I>
    | HEIGHT <I> ID <K> ALT <K> WIDTH <I> SRC <K> | ID <K> HEIGHT <I> ALT <K> WIDTH <I> SRC <K> | ID <K> ALT <K> HEIGHT <I> WIDTH <I> SRC <K> | ID <K> ALT <K> WIDTH <I> HEIGHT <I> SRC <K> | ID <K> ALT <K> WIDTH <I> SRC <K> HEIGHT <I>
    | HEIGHT <I> ID <K> ALT <K> SRC <K> WIDTH <I> | ID <K> HEIGHT <I> ALT <K> SRC <K> WIDTH <I> | ID <K> ALT <K> HEIGHT <I> SRC <K> WIDTH <I> | ID <K> ALT <K> SRC <K> HEIGHT <I> WIDTH <I> | ID <K> ALT <K> SRC <K> WIDTH <I> HEIGHT <I>
    | HEIGHT <I> WIDTH <I> SRC <K> ID <K> ALT <K> | WIDTH <I> HEIGHT <I> SRC <K> ID <K> ALT <K> | WIDTH <I> SRC <K> HEIGHT <I> ID <K> ALT <K> | WIDTH <I> SRC <K> ID <K> HEIGHT <I> ALT <K> | WIDTH <I> SRC <K> ID <K> ALT <K> HEIGHT <I>
