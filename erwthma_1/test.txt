@@ -19,7 +19,7 @@
         <label for = "name" id="label1">Name:</label>
         <input type="text" id="name">
         <label id="label2" for="lastname">Last Name:</label>
-        <input type="text" id = "lastname">
+        <input type="text" >
         <input id="submit" type="submit" value='Submit "it" '>
     </form>
 

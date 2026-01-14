@@ -584,7 +584,7 @@ int yy_flex_debug = 0;
 char *yytext;
 #line 1 "lexer.l"
 #line 2 "lexer.l"
-    #include "parser.tab.h" //σύνδεση με το bison για να ξέρει τα tokens
+    #include "parser.tab.h" //σύνδεση με το bison
     #include <stdio.h>
 #line 589 "lex.yy.c"
 /*leme ston lexer na metraei automata tis grammes stin metavliti yylineno */
@@ -889,7 +889,7 @@ YY_RULE_SETUP
 case 2:
 YY_RULE_SETUP
 #line 18 "lexer.l"
-{printf("%s", yytext); return MYHTML_OPEN; }  /*printf gia na ektipwsoume kathe grammi tou programmatos pou diavazetai */
+{printf("%s", yytext); return MYHTML_OPEN; } 
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
@@ -1095,7 +1095,7 @@ YY_RULE_SETUP
 case 43:
 YY_RULE_SETUP
 #line 74 "lexer.l"
-{ printf("%s", yytext); return INT; } //1 giati to 0 den einai akrivws thetiko
+{ printf("%s", yytext); return INT; }
 	YY_BREAK
 case 44:
 YY_RULE_SETUP

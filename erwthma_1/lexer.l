@@ -1,5 +1,5 @@
 %{
-    #include "parser.tab.h" //σύνδεση με το bison για να ξέρει τα tokens
+    #include "parser.tab.h" //σύνδεση με το bison
     #include <stdio.h>
 %}
 
@@ -15,7 +15,7 @@
 
 "<--" {printf("%s", yytext); BEGIN COMMENT;}
 
-"<MYHTML>"  {printf("%s", yytext); return MYHTML_OPEN; }  /*printf gia na ektipwsoume kathe grammi tou programmatos pou diavazetai */
+"<MYHTML>"  {printf("%s", yytext); return MYHTML_OPEN; } 
 "</MYHTML>" {printf("%s", yytext); return MYHTML_CLOSE; } 
 
 "<head>"  {printf("%s", yytext); return HEAD_OPEN; }
@@ -71,7 +71,7 @@
 
 <TAG>"<--" {fflush(stdout);fprintf(stderr, "\nError line %d: Comments are not allowed inside tags\n", yylineno); exit(1); }
 
-<TAG>\"[1-9][0-9]*\" { printf("%s", yytext); return INT; } //1 giati to 0 den einai akrivws thetiko
+<TAG>\"[1-9][0-9]*\" { printf("%s", yytext); return INT; }
 
 <TAG>\'[1-9][0-9]*\' { printf("%s", yytext); return INT; }
 
